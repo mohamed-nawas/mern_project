@@ -8,12 +8,13 @@ import {useDispatch} from "react-redux";
 import {getPosts} from './actions/posts';
 
 function App() {
+    const [currentPostId, setCurrentPostId] = React.useState(null);
     const classes = useStyles();
     const dispatch = useDispatch();
 
     React.useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch]);
+    }, [currentPostId, dispatch]);
 
     return (
         <Container maxWidth="lg">
@@ -27,10 +28,10 @@ function App() {
                 <Container>
                     <Grid container justify="space-between" alignItems="stretch" spacing={3}>
                         <Grid item xs={12} sm={7}>
-                            <Posts/>
+                            <Posts setCurrentPostId={setCurrentPostId}/>
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <Form/>
+                            <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>
                         </Grid>
                     </Grid>
                 </Container>
